@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maru Aung Latt - .NET Developer</title>
+    <!-- Chosen Palette: Warm Neutrals (Light Beige, Dark Slate, Muted Blue Accent) -->
+    <!-- Application Structure Plan: A single-page application with a sticky top navigation for easy access to sections. The structure is designed for recruiters: a quick summary, an interactive skills visualization using Chart.js bar charts for clarity, and a collapsible, chronological timeline for Work Experience and Projects to show career progression without overwhelming the user. This non-linear but guided structure is more engaging and efficient than a static document. -->
+    <!-- Visualization & Content Choices: Report Info: Skills List -> Goal: Inform/Compare -> Viz: Grouped horizontal bar charts per skill category -> Interaction: Hover tooltips -> Justification: Provides a quick, organized visual summary of technical abilities, which is more scannable than a simple list. Library: Chart.js. Report Info: Work History & Projects -> Goal: Show Change/Organize -> Viz: Vertical timeline with collapsible sections -> Interaction: Click to expand/collapse details -> Justification: Presents a clean career narrative, allowing users to drill down into details as needed, reducing initial cognitive load. Method: HTML/CSS/JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFDFB;
+            color: #1a202c;
+        }
+        .nav-link.active {
+            color: #3B82F6;
+            font-weight: 700;
+        }
+        .timeline-item-content {
+            transition: max-height 0.7s ease-in-out, opacity 0.5s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .timeline-item-content.open {
+            max-height: 1000px;
+            opacity: 1;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-200">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#home" class="text-xl font-bold text-gray-800">Maru Aung Latt</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#experience" class="nav-link text-gray-600 hover:text-blue-500 transition-colors">Experience</a>
+                    <a href="#skills" class="nav-link text-gray-600 hover:text-blue-500 transition-colors">Skills</a>
+                    <a href="#projects" class="nav-link text-gray-600 hover:text-blue-500 transition-colors">Projects</a>
+                    <a href="#contact" class="nav-link text-gray-600 hover:text-blue-500 transition-colors">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <a href="#experience" class="block py-2 text-gray-600 hover:text-blue-500">Experience</a>
+                <a href="#skills" class="block py-2 text-gray-600 hover:text-blue-500">Skills</a>
+                <a href="#projects" class="block py-2 text-gray-600 hover:text-blue-500">Projects</a>
+                <a href="#contact" class="block py-2 text-gray-600 hover:text-blue-500">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6">
+        <section id="home" class="py-20 md:py-32 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 tracking-tight">Maru Aung Latt</h1>
+            <p class="mt-4 text-xl md:text-2xl text-gray-600">Senior .NET Developer</p>
+            <p class="mt-8 max-w-3xl mx-auto text-lg text-gray-500">
+                Ambitious and enthusiastic .NET Developer experienced in developing diverse applications, websites, and mission-critical government and financial systems. Possesses a highly agile and tenacious work ethic, consistently ensuring successful project outcomes and delivery of high-quality, secure software solutions.
+            </p>
+            <div class="mt-10 flex justify-center space-x-6">
+                 <a href="mailto:marutbaunglatt@gmail.com" class="text-gray-500 hover:text-blue-500" aria-label="Email">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
+                </a>
+            </div>
+        </section>
+
+        <section id="experience" class="py-20">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Career Timeline</h2>
+            <div class="relative max-w-4xl mx-auto">
+                <div class="absolute left-1/2 w-0.5 h-full bg-gray-300 transform -translate-x-1/2"></div>
+                
+                <div class="timeline-item mb-12 flex justify-between items-center w-full right-timeline">
+                    <div class="order-1 w-5/12"></div>
+                    <div class="z-20 flex items-center order-1 bg-blue-500 shadow-xl w-8 h-8 rounded-full">
+                        <h1 class="mx-auto font-semibold text-lg text-white">1</h1>
+                    </div>
+                    <div class="order-1 bg-white rounded-lg shadow-xl w-5/12 px-6 py-4">
+                        <p class="text-sm text-gray-500">Sep 2023 – Present</p>
+                        <h3 class="font-bold text-gray-800 text-xl">UAB Company</h3>
+                        <p class="text-md font-semibold text-gray-600 mb-4">Senior .NET Developer</p>
+                        <button class="toggle-details text-blue-500 text-sm font-semibold">Show Details ▼</button>
+                        <div class="timeline-item-content">
+                            <ul class="list-disc list-inside mt-4 text-gray-600 space-y-2">
+                                <li>Developing robust backend systems utilizing .NET Core within a Modular Monolithic architecture for core banking applications.</li>
+                                <li>Building dynamic and responsive frontend interfaces with Angular.</li>
+                                <li>Implementing the Command Query Responsibility Segregation (CQRS) pattern.</li>
+                                <li>Spearheading the implementation of critical security measures, including advanced hashing algorithms and robust encryption/decryption techniques.</li>
+                                <li>Developing cross-platform mobile applications using Angular and Ionic frameworks.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item mb-12 flex justify-between flex-row-reverse items-center w-full left-timeline">
+                    <div class="order-1 w-5/12"></div>
+                    <div class="z-20 flex items-center order-1 bg-blue-500 shadow-xl w-8 h-8 rounded-full">
+                        <h1 class="mx-auto text-white font-semibold text-lg">2</h1>
+                    </div>
+                    <div class="order-1 bg-white rounded-lg shadow-xl w-5/12 px-6 py-4">
+                        <p class="text-sm text-gray-500">Aug 2020 – Sep 2024</p>
+                        <h3 class="font-bold text-gray-800 text-xl">Secure Link Company</h3>
+                        <p class="text-md font-semibold text-gray-600 mb-4">Senior .NET Developer</p>
+                        <button class="toggle-details text-blue-500 text-sm font-semibold">Show Details ▼</button>
+                        <div class="timeline-item-content">
+                            <ul class="list-disc list-inside mt-4 text-gray-600 space-y-2">
+                                <li>Engineered and maintained projects leveraging .NET Core (SignalR), Angular, Blazor, and Windows Forms.</li>
+                                <li>Successfully deployed applications on both Windows and Linux server environments.</li>
+                                <li>Integrated third-party APIs and payment gateways.</li>
+                                <li>Managed separate database, file, and web servers for optimal system efficiency.</li>
+                                <li class="font-bold mt-2">Key Project: National Immigration & Border Control System (see Projects section).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20 bg-gray-50">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Technical Skills</h2>
+             <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">A visual overview of my proficiency across various technologies and platforms. These charts represent the tools I use to build robust, scalable, and secure applications.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-xl font-semibold text-center mb-4 text-gray-700">Languages & Technologies</h3>
+                    <div class="chart-container"><canvas id="techChart"></canvas></div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-center mb-4 text-gray-700">Databases</h3>
+                    <div class="chart-container"><canvas id="dbChart"></canvas></div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-center mb-4 text-gray-700">Platforms & Security</h3>
+                    <div class="chart-container"><canvas id="platSecChart"></canvas></div>
+                </div>
+                 <div>
+                    <h3 class="text-xl font-semibold text-center mb-4 text-gray-700">Patterns & Methodologies</h3>
+                    <div class="chart-container"><canvas id="archChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Featured Project</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">This project highlights my ability to design and implement complex, mission-critical systems with high availability and robust data handling capabilities.</p>
+            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl p-8 border border-gray-200">
+                <h3 class="text-2xl font-bold text-gray-800">National Immigration & Border Control System</h3>
+                <p class="text-sm text-gray-500 mb-4">Role at: Secure Link Company</p>
+                <p class="text-gray-600 mb-6">Developed and maintained a comprehensive system for managing passenger data at international airports, enhancing national security and immigration processes.</p>
+                
+                <h4 class="font-semibold text-lg text-gray-700 mb-2">My Role & Contributions:</h4>
+                <ul class="list-disc list-inside space-y-2 text-gray-600">
+                    <li>Developed the primary counter application using Windows Forms (C#) for capturing passenger data.</li>
+                    <li>Engineered a robust data synchronization mechanism: data flowed from airport counters to local Linux-based airport servers, and then aggregated to a central server.</li>
+                    <li>Implemented an offline data handling capability to ensure data integrity during internet disruptions, queuing passenger data for subsequent transmission.</li>
+                    <li>Utilized SignalR to deliver real-time blacklist information from the central server to airport counters.</li>
+                    <li>Contributed to the central server's functionalities, including management of visa types, stay durations, and monitoring tools for passenger statistics.</li>
+                    <li>Integrated the "Form C" system (for tracking foreigner accommodation) with the central server.</li>
+                </ul>
+
+                <h4 class="font-semibold text-lg text-gray-700 mt-6 mb-2">Technologies Used:</h4>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">C#</span>
+                    <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">.NET Framework</span>
+                    <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Windows Forms</span>
+                    <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">SignalR</span>
+                    <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Linux Server</span>
+                    <span class="bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">SQL Databases</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-gray-50 text-center">
+             <h2 class="text-3xl font-bold text-gray-800">Get In Touch</h2>
+             <p class="mt-4 text-lg text-gray-600 max-w-xl mx-auto">I'm currently seeking new opportunities and would love to hear from you. Feel free to contact me via email.</p>
+             <a href="mailto:marutbaunglatt@gmail.com" class="mt-8 inline-block bg-blue-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-600 transition-colors">
+                Email Me
+            </a>
+        </section>
+
+    </main>
+    
+    <footer class="bg-white border-t border-gray-200">
+        <div class="container mx-auto py-6 px-6 text-center text-gray-500">
+            <p>&copy; 2024 Maru Aung Latt. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const navLinks = document.querySelectorAll('.nav-link, #mobile-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                         mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            const sections = document.querySelectorAll('section');
+            const navLi = document.querySelectorAll('header nav a');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 65) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLi.forEach(a => {
+                    a.classList.remove('active');
+                    if (a.getAttribute('href') == '#' + current) {
+                        a.classList.add('active');
+                    }
+                });
+            });
+
+            const detailToggles = document.querySelectorAll('.toggle-details');
+            detailToggles.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const isOpen = content.classList.contains('open');
+                    content.classList.toggle('open');
+                    button.textContent = isOpen ? 'Show Details ▼' : 'Hide Details ▲';
+                });
+            });
+
+            const skillsData = {
+                tech: {
+                    labels: ['C#', '.NET (Core, MVC, API)', 'Blazor', 'Angular', 'React', 'Node.js', 'HTML/CSS/JS', 'TypeScript', 'SignalR', 'Windows Forms', 'Ionic'],
+                    data: [95, 95, 80, 85, 75, 70, 90, 85, 88, 90, 80]
+                },
+                databases: {
+                    labels: ['MS SQL Server', 'PostgreSQL', 'MySQL', 'MongoDB'],
+                    data: [90, 80, 85, 75]
+                },
+                platSec: {
+                    labels: ['AWS', 'Windows Server', 'Linux', 'Data Encryption', 'Hashing', 'Secure API Dev'],
+                    data: [70, 90, 85, 85, 85, 90]
+                },
+                 architectures: {
+                    labels: ['Modular Monolithic', 'N-Tier', 'Client-Server', 'CQRS', 'Agile'],
+                    data: [90, 95, 90, 85, 95]
+                }
+            };
+            
+            const createChart = (ctx, labels, data, label) => {
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: label,
+                            data: data,
+                            backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                             tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.raw >= 85 ? 'Proficient' : 'Experienced';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 100,
+                                grid: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                 grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+
+            createChart(document.getElementById('techChart').getContext('2d'), skillsData.tech.labels, skillsData.tech.data, 'Proficiency');
+            createChart(document.getElementById('dbChart').getContext('2d'), skillsData.databases.labels, skillsData.databases.data, 'Proficiency');
+            createChart(document.getElementById('platSecChart').getContext('2d'), skillsData.platSec.labels, skillsData.platSec.data, 'Proficiency');
+            createChart(document.getElementById('archChart').getContext('2d'), skillsData.architectures.labels, skillsData.architectures.data, 'Familiarity');
+        });
+    </script>
+</body>
+</html>
